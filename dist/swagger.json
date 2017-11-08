@@ -1,0 +1,299 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Book API",
+        "description": "Easily integrate your application",
+        "version": "1.0.0"
+    },
+    "host": "54.201.153.202:8090",
+    "schemes": [
+        "http"
+    ],
+    "basePath": "/api/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/book": {
+            "post": {
+                "summary": "Create Book",
+                "description": "Creates a new book.\n",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "Title of the book",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Description of the book.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "author",
+                        "in": "query",
+                        "description": "Author that published the book.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                      "name": "api_token",
+                      "in": "query",
+                      "description": "Your token that is provided on registration.",
+                      "required": true,
+                      "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Book"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book created with success",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Retrieve Books",
+                "description": "Returns existing books.\n",
+                "tags": [
+                    "Book"
+                ],
+                "parameters": [
+                  {
+                    "name": "api_token",
+                    "in": "query",
+                    "description": "Your token that is provided on registration.",
+                    "required": true,
+                    "type": "string"
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of books",
+                        "schema": {
+                            "$ref": "#/definitions/Data"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/book/{bookId}": {
+            "get": {
+                "summary": "Retrieve existing book",
+                "description": "Returns a specific book.\n",
+                "parameters": [
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "Unique identifier of the book.",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    },
+                    {
+                      "name": "api_token",
+                      "in": "query",
+                      "description": "Your token that is provided on registration.",
+                      "required": true,
+                      "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Book"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieve book with success",
+                        "schema": {
+                            "$ref": "#/definitions/Book"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update Book",
+                "description": "Update an existing book with new information.\n",
+                "parameters": [
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "Unique identifier of the book.",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "Title of the book",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Description of the book.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "author",
+                        "in": "query",
+                        "description": "Author that published the book.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                      "name": "api_token",
+                      "in": "query",
+                      "description": "Your token that is provided on registration.",
+                      "required": true,
+                      "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Book"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book updated with success",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete existing book",
+                "description": "Delete an existing book.\n",
+                "parameters": [
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "Unique identifier of the book.",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    },
+                    {
+                      "name": "api_token",
+                      "in": "query",
+                      "description": "Your token that is provided on registration.",
+                      "required": true,
+                      "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Book"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book deleted with success",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Book": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "format": "integer",
+                    "description": "Unique identifier representing a specific book."
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Title of the book."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the book (max 255 caracters)."
+                },
+                "author": {
+                    "type": "string",
+                    "description": "Author of the book (max 50 caracters)."
+                },
+		"created_at": {
+		    "type": "string",
+		    "format": "date-time",
+		    "description": "Date and time when the book was created."
+		},
+		"updated_at": {
+                    "type": "string",
+		    "format": "date-time",
+                    "description": "Date and time when the book was last updated."
+                }
+            }
+        },
+        "Data": {
+            "type": "object",
+            "properties":{
+              "data":{
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Book"
+                }
+              }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "Success": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
